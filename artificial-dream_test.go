@@ -10,6 +10,7 @@ type game struct {
 	isInput            bool
 	isUpdate           bool
 	isInputAfterUpdate bool
+	isRender           bool
 }
 
 func (g *game) Input() {
@@ -20,6 +21,10 @@ func (g *game) Input() {
 func (g *game) Update() {
 	g.isUpdate = true
 	g.isInputAfterUpdate = true
+}
+
+func (g *game) Render() {
+	g.isRender = true
 }
 
 func TestGameLoop(t *testing.T) {
@@ -35,6 +40,9 @@ func TestGameLoop(t *testing.T) {
 				So(g.isInputAfterUpdate, ShouldBeTrue)
 			})
 
+		})
+		Convey("Render is run", func() {
+			So(g.isRender, ShouldBeTrue)
 		})
 
 	})

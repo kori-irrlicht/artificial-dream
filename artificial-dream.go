@@ -5,6 +5,7 @@ func main() {
 }
 
 func gameLoop(g Game) {
+	g.Render()
 	g.Input()
 	g.Update()
 
@@ -13,4 +14,5 @@ func gameLoop(g Game) {
 type Game interface {
 	Update()
 	Input()
+	Render()
 }
