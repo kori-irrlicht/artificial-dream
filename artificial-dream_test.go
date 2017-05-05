@@ -7,24 +7,27 @@ import (
 )
 
 type game struct {
-	isInput            bool
-	isUpdate           bool
-	isInputAfterUpdate bool
-	isRender           bool
+	isInput             bool
+	isUpdate            bool
+	isUpdateAfterInput  bool
+	isRender            bool
+	isRenderAfterUpdate bool
 }
 
 func (g *game) Input() {
 	g.isInput = true
-	g.isInputAfterUpdate = false
+	g.isUpdateAfterInput = false
 }
 
 func (g *game) Update() {
 	g.isUpdate = true
-	g.isInputAfterUpdate = true
+	g.isUpdateAfterInput = true
+	g.isRenderAfterUpdate = false
 }
 
 func (g *game) Render() {
 	g.isRender = true
+	g.isRenderAfterUpdate = true
 }
 
 func TestGameLoop(t *testing.T) {
@@ -37,12 +40,15 @@ func TestGameLoop(t *testing.T) {
 		Convey("Update is run", func() {
 			So(g.isUpdate, ShouldBeTrue)
 			Convey("After Input", func() {
-				So(g.isInputAfterUpdate, ShouldBeTrue)
+				So(g.isUpdateAfterInput, ShouldBeTrue)
 			})
 
 		})
 		Convey("Render is run", func() {
 			So(g.isRender, ShouldBeTrue)
+			Convey("After Update", func() {
+				So(g.isRenderAfterUpdate, ShouldBeTrue)
+			})
 		})
 
 	})

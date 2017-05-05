@@ -5,9 +5,9 @@ func main() {
 }
 
 func gameLoop(g Game) {
-	g.Render()
 	g.Input()
 	g.Update()
+	g.Render()
 
 }
 
