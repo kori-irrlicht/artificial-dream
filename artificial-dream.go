@@ -5,7 +5,7 @@ func main() {
 }
 
 func gameLoop(g Game) {
-	if g.Running() {
+	for g.Running() {
 
 		g.Input()
 		g.Update()
