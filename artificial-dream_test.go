@@ -7,11 +7,16 @@ import (
 )
 
 type game struct {
-	isInput bool
+	isInput  bool
+	isUpdate bool
 }
 
 func (g *game) Input() {
 	g.isInput = true
+}
+
+func (g *game) Update() {
+	g.isUpdate = true
 }
 
 func TestGameLoop(t *testing.T) {
@@ -20,6 +25,10 @@ func TestGameLoop(t *testing.T) {
 		gameLoop(g)
 		Convey("Input is run", func() {
 			So(g.isInput, ShouldBeTrue)
+		})
+		Convey("Update is run", func() {
+			So(g.isUpdate, ShouldBeTrue)
+
 		})
 
 	})
