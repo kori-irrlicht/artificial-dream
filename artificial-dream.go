@@ -5,8 +5,8 @@ func main() {
 }
 
 func gameLoop(g Game) {
-	g.Update()
 	g.Input()
+	g.Update()
 
 }
 
