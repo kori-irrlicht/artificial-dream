@@ -12,6 +12,7 @@ type game struct {
 	isUpdateAfterInput  bool
 	isRender            bool
 	isRenderAfterUpdate bool
+	isRunning           bool
 }
 
 func (g *game) Input() {
@@ -30,24 +31,47 @@ func (g *game) Render() {
 	g.isRenderAfterUpdate = true
 }
 
+func (g *game) Running() bool {
+	return g.isRunning
+}
+
 func TestGameLoop(t *testing.T) {
 	g := &game{}
 	Convey("Main is called", t, func() {
-		gameLoop(g)
-		Convey("Input is run", func() {
-			So(g.isInput, ShouldBeTrue)
-		})
-		Convey("Update is run", func() {
-			So(g.isUpdate, ShouldBeTrue)
-			Convey("After Input", func() {
-				So(g.isUpdateAfterInput, ShouldBeTrue)
+		Convey("Game is not running", func() {
+			g.isRunning = false
+			gameLoop(g)
+			Convey("Input is not run", func() {
+				So(g.isInput, ShouldBeFalse)
+			})
+			Convey("Update is not run", func() {
+				So(g.isUpdate, ShouldBeFalse)
+
+			})
+			Convey("Render is not run", func() {
+				So(g.isRender, ShouldBeFalse)
 			})
 
 		})
-		Convey("Render is run", func() {
-			So(g.isRender, ShouldBeTrue)
-			Convey("After Update", func() {
-				So(g.isRenderAfterUpdate, ShouldBeTrue)
+
+		Convey("Game is running", func() {
+			g.isRunning = true
+			gameLoop(g)
+			Convey("Input is run", func() {
+				So(g.isInput, ShouldBeTrue)
+			})
+			Convey("Update is run", func() {
+				So(g.isUpdate, ShouldBeTrue)
+				Convey("After Input", func() {
+					So(g.isUpdateAfterInput, ShouldBeTrue)
+				})
+
+			})
+			Convey("Render is run", func() {
+				So(g.isRender, ShouldBeTrue)
+				Convey("After Update", func() {
+					So(g.isRenderAfterUpdate, ShouldBeTrue)
+				})
 			})
 		})
 
