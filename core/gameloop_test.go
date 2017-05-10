@@ -1,4 +1,4 @@
-package main
+package core
 
 import (
 	"testing"
@@ -54,7 +54,7 @@ func TestGameLoop(t *testing.T) {
 		Convey("Game is not running", func() {
 			g.isRunning <- false
 			g.time <- time.Unix(0, 0)
-			gameLoop(g)
+			GameLoop(g)
 			Convey("Input is not run", func() {
 				So(g.isInput, ShouldEqual, 0)
 			})
@@ -73,7 +73,7 @@ func TestGameLoop(t *testing.T) {
 			g.isRunning <- false
 			g.time <- time.Unix(0, 0)
 			g.time <- time.Unix(0, 16000000)
-			gameLoop(g)
+			GameLoop(g)
 			Convey("Input is run", func() {
 				So(g.isInput, ShouldEqual, 1)
 			})
@@ -101,7 +101,7 @@ func TestGameLoop(t *testing.T) {
 			g.time <- time.Unix(0, 16000000)
 			g.time <- time.Unix(0, 16000000*2)
 			g.time <- time.Unix(0, 16000000*3)
-			gameLoop(g)
+			GameLoop(g)
 			Convey("Input is run 3 times", func() {
 				So(g.isInput, ShouldEqual, 3)
 			})
@@ -118,7 +118,7 @@ func TestGameLoop(t *testing.T) {
 			g.isRunning <- false
 			g.time <- time.Unix(0, 0)
 			g.time <- time.Unix(0, 16*2*1000*1000)
-			gameLoop(g)
+			GameLoop(g)
 			Convey("Input is run 1 times", func() {
 				So(g.isInput, ShouldEqual, 1)
 			})
