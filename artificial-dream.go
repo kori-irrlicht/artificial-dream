@@ -23,6 +23,8 @@ func main() {
 		panic(err)
 	}
 
+	core.GameLoop(&game{running: true})
+
 	defer window.Destroy()
 
 	sdl.Delay(1000)
