@@ -29,9 +29,10 @@ type sceneManager struct {
 }
 
 // NewSceneManager returns a basic implementation of SceneManager
-func NewSceneManager() SceneManager {
+func NewSceneManager(name string) SceneManager {
 	sm := &sceneManager{}
 	sm.scenes = make(map[string]Scene)
+	sm.name = name
 	return sm
 }
 
