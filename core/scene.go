@@ -34,9 +34,15 @@ func NewSceneManager() SceneManager {
 	return sm
 }
 
-func (sm *sceneManager) Update()      {}
-func (sm *sceneManager) Input()       {}
-func (sm *sceneManager) Render()      {}
+func (sm *sceneManager) Update() {
+	sm.current.Update()
+}
+func (sm *sceneManager) Input() {
+	sm.current.Input()
+}
+func (sm *sceneManager) Render() {
+	sm.current.Render()
+}
 func (sm *sceneManager) Name() string { return "" }
 func (sm *sceneManager) Add(scene Scene) {
 	sm.scenes[scene.Name()] = scene
