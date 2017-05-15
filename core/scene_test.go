@@ -23,6 +23,10 @@ func TestSceneManager(t *testing.T) {
 			Convey("Adding the scene", func() {
 				sm.Add(&s1)
 				So(sm.scenes[0], ShouldEqual, &s1)
+				Convey("And changing to it", func() {
+					sm.Change(s1.Name())
+					So(sm.current, ShouldEqual, &s1)
+				})
 			})
 		})
 	})
