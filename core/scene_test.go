@@ -18,14 +18,19 @@ func (s *scene) Name() string { return s.name }
 func TestSceneManager(t *testing.T) {
 	Convey("A new sceneManager", t, func() {
 		sm := NewSceneManager().(*sceneManager)
+		Convey("Changing to a non-existing scene", func() {
+			err := sm.Change("nope")
+			So(err, ShouldNotBeNil)
+		})
 		Convey("And a new scene", func() {
 			s1 := scene{"s1"}
 			Convey("Adding the scene", func() {
 				sm.Add(&s1)
 				So(sm.scenes[s1.Name()], ShouldEqual, &s1)
 				Convey("And changing to it", func() {
-					sm.Change(s1.Name())
+					err := sm.Change(s1.Name())
 					So(sm.current, ShouldEqual, &s1)
+					So(err, ShouldBeNil)
 				})
 				Convey("Adding another scene", func() {
 					s2 := scene{"s2"}

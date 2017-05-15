@@ -1,5 +1,7 @@
 package core
 
+import "errors"
+
 // Scene defines a scene, which can be displayed by the SceneManager
 type Scene interface {
 	Update()
@@ -11,8 +13,12 @@ type Scene interface {
 // SceneManager containts the Scenes and displays the current one
 type SceneManager interface {
 	Scene
+
+	// Add adds a scene to the manager
 	Add(Scene)
-	Change(string)
+
+	// Change changes the current scene to the scene with the given name
+	Change(string) error
 }
 
 // sceneManager is a basic implementation of SceneManager
@@ -35,6 +41,11 @@ func (sm *sceneManager) Name() string { return "" }
 func (sm *sceneManager) Add(scene Scene) {
 	sm.scenes[scene.Name()] = scene
 }
-func (sm *sceneManager) Change(name string) {
-	sm.current = sm.scenes[name]
+func (sm *sceneManager) Change(name string) error {
+	res, ok := sm.scenes[name]
+	if !ok {
+		return errors.New("Unknown scene name")
+	}
+	sm.current = res
+	return nil
 }
