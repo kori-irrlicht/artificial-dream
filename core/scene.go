@@ -25,6 +25,7 @@ type SceneManager interface {
 type sceneManager struct {
 	scenes  map[string]Scene
 	current Scene
+	name    string
 }
 
 // NewSceneManager returns a basic implementation of SceneManager
@@ -43,7 +44,9 @@ func (sm *sceneManager) Input() {
 func (sm *sceneManager) Render() {
 	sm.current.Render()
 }
-func (sm *sceneManager) Name() string { return "" }
+func (sm *sceneManager) Name() string {
+	return sm.name
+}
 func (sm *sceneManager) Add(scene Scene) {
 	sm.scenes[scene.Name()] = scene
 }
