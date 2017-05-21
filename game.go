@@ -3,11 +3,13 @@ package main
 import (
 	"time"
 
+	"github.com/kori-irrlicht/artificial-dream/core"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
 type game struct {
-	running bool
+	running      bool
+	sceneManager core.SceneManager
 }
 
 func (g *game) FrameTime() time.Duration {
