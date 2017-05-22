@@ -1,5 +1,7 @@
 package core
 
+import "github.com/veandco/go-sdl2/sdl"
+
 // InputType is an abstract layer between controller/keyboard input and the input
 // the game will receive
 type InputType int
@@ -18,7 +20,7 @@ const (
 // Controller is an abstraction of the keyboard or a game controller (PS4, XBox1, Steam,...)
 type Controller interface {
 	IsDown(InputType) bool
-	Update()
+	Update(sdl.Event)
 }
 
 // keyboardController is used, when the game is played with a keyboard
@@ -33,7 +35,7 @@ func (k keyboardController) IsDown(it InputType) bool {
 }
 
 // Update implements the Controller interface
-func (k keyboardController) Update() {
+func (k keyboardController) Update(event sdl.Event) {
 
 }
 
