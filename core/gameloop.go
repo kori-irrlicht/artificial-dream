@@ -2,9 +2,7 @@ package core
 
 import "time"
 
-/**
- * GameLoop implements a fixed timestep gameloop
- */
+// GameLoop implements a fixed timestep gameloop
 func GameLoop(g Game) {
 	dt := g.FrameTime()
 
@@ -29,9 +27,7 @@ func GameLoop(g Game) {
 
 }
 
-/**
- * Game contains the game logic
- */
+// Game contains the game logic
 type Game interface {
 	Update()
 	Input()
