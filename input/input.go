@@ -18,6 +18,7 @@ const (
 // Controller is an abstraction of the keyboard or a game controller (PS4, XBox1, Steam,...)
 type Controller interface {
 	IsDown(InputType) bool
+	Update()
 }
 
 // keyboardController is used, when the game is played with a keyboard
@@ -29,6 +30,11 @@ type keyboardController struct {
 // IsDown implements the Controller interface
 func (k keyboardController) IsDown(it InputType) bool {
 	return false
+}
+
+// Update implements the Controller interface
+func (k keyboardController) Update() {
+
 }
 
 // NewKeyboardController creates a new Controller with the given KeyboardMapping
