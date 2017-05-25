@@ -4,12 +4,14 @@ import (
 	"time"
 
 	"github.com/kori-irrlicht/artificial-dream/core"
+	"github.com/kori-irrlicht/artificial-dream/input"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
 type game struct {
 	running      bool
 	sceneManager core.SceneManager
+	controller   input.Controller
 }
 
 func (g *game) FrameTime() time.Duration {
@@ -21,6 +23,9 @@ func (g *game) Input() {
 		switch event.(type) {
 		case *sdl.QuitEvent:
 			g.running = false
+		default:
+
+			g.controller.Update(event)
 
 		}
 

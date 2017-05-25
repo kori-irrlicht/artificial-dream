@@ -12,7 +12,7 @@ func TestGameController(t *testing.T) {
 	Convey("A new GameController", t, func() {
 		gc := NewGameController().(*gameController)
 		So(gc, ShouldNotBeNil)
-		gc.mapping[sdl.CONTROLLER_BUTTON_DPAD_UP] = InputUp
+		gc.mapping[sdl.CONTROLLER_BUTTON_DPAD_UP] = []InputType{InputUp}
 		Convey("InputUp is not pressed", func() {
 			So(gc.IsDown(InputUp), ShouldBeFalse)
 		})

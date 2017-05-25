@@ -18,12 +18,19 @@ func (gc *gameController) Update(ev sdl.Event) {
 	switch t := ev.(type) {
 	case *sdl.ControllerButtonEvent:
 		if t.State == sdl.PRESSED {
-			gc.keyState[gc.mapping[int(t.Button)]] = true
+			for _, v := range gc.mapping[int(t.Button)] {
+				gc.keyState[v] = true
+			}
 		}
 		if t.State == sdl.RELEASED {
-			gc.keyState[gc.mapping[int(t.Button)]] = false
+			for _, v := range gc.mapping[int(t.Button)] {
+				gc.keyState[v] = false
+			}
 		}
+	case *sdl.ControllerAxisEvent:
+
 	}
+
 }
 
 func NewGameController() Controller {
@@ -34,12 +41,18 @@ func NewGameController() Controller {
 }
 
 func (gc *gameController) ResetMapping() {
-	m := make(Mapping)
+	m := Mapping{
+		sdl.CONTROLLER_BUTTON_DPAD_UP:    []InputType{InputUp},
+		sdl.CONTROLLER_BUTTON_DPAD_DOWN:  []InputType{InputDown},
+		sdl.CONTROLLER_BUTTON_DPAD_LEFT:  []InputType{InputLeft},
+		sdl.CONTROLLER_BUTTON_DPAD_RIGHT: []InputType{InputRight},
 
-	m[sdl.CONTROLLER_BUTTON_DPAD_UP] = InputUp
-	m[sdl.CONTROLLER_BUTTON_DPAD_DOWN] = InputDown
-	m[sdl.CONTROLLER_BUTTON_DPAD_LEFT] = InputLeft
-	m[sdl.CONTROLLER_BUTTON_DPAD_RIGHT] = InputRight
+		sdl.CONTROLLER_BUTTON_A:             []InputType{InputOK, InputInteract},
+		sdl.CONTROLLER_BUTTON_B:             []InputType{InputBack},
+		sdl.CONTROLLER_BUTTON_RIGHTSHOULDER: []InputType{InputAttack},
+
+		sdl.CONTROLLER_BUTTON_START: []InputType{InputPause},
+	}
 
 	gc.mapping = m
 }

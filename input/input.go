@@ -12,6 +12,15 @@ const (
 	InputDown
 	InputLeft
 	InputRight
+
+	InputOK
+	InputBack
+
+	InputPause
+
+	InputInteract
+	InputAttack
+	InputUseItem
 )
 
 // Controller is an abstraction of the keyboard or a game controller (PS4, XBox1, Steam,...)
@@ -22,4 +31,4 @@ type Controller interface {
 }
 
 // Mapping maps a key to an InputType
-type Mapping map[int]InputType
+type Mapping map[int][]InputType
