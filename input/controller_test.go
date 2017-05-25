@@ -1,7 +1,6 @@
 package input
 
 import (
-	"fmt"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
@@ -13,7 +12,7 @@ func TestGameController(t *testing.T) {
 	Convey("A new GameController", t, func() {
 		gc := NewGameController().(*gameController)
 		So(gc, ShouldNotBeNil)
-		fmt.Println(gc)
+		gc.mapping[sdl.CONTROLLER_BUTTON_DPAD_UP] = InputUp
 		Convey("DPAD UP is pressed", func() {
 			gc.Update(&sdl.ControllerButtonEvent{
 				Button: sdl.CONTROLLER_BUTTON_DPAD_UP,
