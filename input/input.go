@@ -18,6 +18,7 @@ const (
 type Controller interface {
 	IsDown(InputType) bool
 	Update(sdl.Event)
+	ResetMapping()
 }
 
 // Mapping maps a key to an InputType

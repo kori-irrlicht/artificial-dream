@@ -14,14 +14,17 @@ func (k keyboardController) IsDown(it InputType) bool {
 }
 
 // Update implements the Controller interface
-func (k keyboardController) Update(event sdl.Event) {
+func (k *keyboardController) Update(event sdl.Event) {
 
 }
 
 // NewKeyboardController creates a new Controller with the given KeyboardMapping
-func NewKeyboardController(km Mapping) Controller {
-	c := keyboardController{}
+func NewKeyboardController() Controller {
+	c := &keyboardController{}
 	c.keyState = make(map[InputType]bool)
-	c.mapping = km
 	return c
+}
+
+func (k *keyboardController) ResetMapping() {
+
 }
